@@ -1,0 +1,27 @@
+#!/usr/bin/expect -f
+
+# Read the username and password file from the argument
+set password_file [lindex $argv 0]
+
+# Open the password file
+set fp [open $password_file r]
+set user_pass [split [read $fp] "\n"]
+close $fp
+
+# Extract username and password
+set username [lindex $user_pass 0]
+set password [lindex $user_pass 1]
+
+# Run the command
+spawn /opt/Xilinx/installer/xsetup -b AuthTokenGen -x
+
+# Handle the email prompt
+expect "E-mail Address:"
+send "$username\r"
+
+# Handle the password prompt
+expect "Password:"
+send "$password\r"
+
+# Wait for the process to complete
+expect eof

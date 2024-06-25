@@ -1,0 +1,45 @@
+# Use the base image from your ECR repository
+FROM 072422391281.dkr.ecr.us-east-1.amazonaws.com/vivado:v2023.2
+
+# Preconfigure environment to avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
+# Install required packages
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    wget \
+    curl \
+    xz-utils \
+    tar \
+    libtinfo5 \
+    libncurses5 \
+    libx11-6 \
+    libxrender1 \
+    libxft2 \
+    libxtst6 \
+    locales \
+    expect \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set locale
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
+# Copy necessary scripts and source files into the Docker image
+COPY . /home/ubuntu/verilog_sources/design2
+
+# Ensure the run scripts have execute permissions
+RUN chmod +x /home/ubuntu/verilog_sources/design2/run_drc.sh
+RUN chmod +x /home/ubuntu/verilog_sources/design2/generate_bitstream.sh
+RUN chmod +x /home/ubuntu/verilog_sources/design2/entrypoint.sh
+
+ENV LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1
+
+# Set the working directory
+WORKDIR /home/ubuntu/verilog_sources/design2
+
+# Set the entrypoint to the entrypoint script
+ENTRYPOINT ["./entrypoint.sh"]
