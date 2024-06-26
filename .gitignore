@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+
+bitstream_generation_metrics_inside.csv
+bitstream_generation_metrics_outside.csv
+bitstream_generation_summary.csv

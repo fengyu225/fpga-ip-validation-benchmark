@@ -29,17 +29,17 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
 # Copy necessary scripts and source files into the Docker image
-COPY . /home/ubuntu/verilog_sources/design2
+COPY . /home/ubuntu/verilog_sources/design1
 
 # Ensure the run scripts have execute permissions
-RUN chmod +x /home/ubuntu/verilog_sources/design2/run_drc.sh
-RUN chmod +x /home/ubuntu/verilog_sources/design2/generate_bitstream.sh
-RUN chmod +x /home/ubuntu/verilog_sources/design2/entrypoint.sh
+RUN chmod +x /home/ubuntu/verilog_sources/design1/run_drc.sh
+RUN chmod +x /home/ubuntu/verilog_sources/design1/generate_bitstream.sh
+RUN chmod +x /home/ubuntu/verilog_sources/design1/entrypoint.sh
 
 ENV LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1
 
 # Set the working directory
-WORKDIR /home/ubuntu/verilog_sources/design2
+WORKDIR /home/ubuntu/verilog_sources/design1
 
 # Set the entrypoint to the entrypoint script
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/home/ubuntu/verilog_sources/design1/run_drc.sh"]
