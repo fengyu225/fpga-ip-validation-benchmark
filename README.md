@@ -1,6 +1,6 @@
-# FPGA IP Validation Benchmark
+# FPGA IP Bitstream Compilation and Validation Benchmark
 
-This project provides tools and Docker images for benchmarking FPGA IP validation processes, including bitstream generation and Design Rule Checks (DRC), both inside and outside of AWS Nitro Enclaves.
+This project provides tools and Docker images for benchmarking FPGA IP bitstream compilation and validation processes, including bitstream generation and Design Rule Checks (DRC), both inside and outside of AWS Nitro Enclaves.
 
 ## Project Structure
 
