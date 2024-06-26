@@ -100,7 +100,7 @@ nitro-cli build-enclave --docker-uri vivado_bitstream:latest --output-file vivad
 6. Run the enclave:
 
 ```sh
-nitro-cli run-enclave --eif-path vivado_bitstream.eif --memory 16384 --cpu-count 4
+nitro-cli run-enclave --eif-path vivado_bitstream.eif --memory 16384 --cpu-count 4 --attach-console --debug-mode
 ```
 
 Replace `vivado_bitstream` with `vivado_drc` if you want to run DRC instead of bitstream generation.
