@@ -20,7 +20,7 @@ This repository provides Docker image setups to either generate a bitstream or r
 To build the Docker images, navigate to the directory containing the Dockerfiles and run the following commands:
 
 ```sh
-docker build -t vivado_bitstream:latest -f Dockerfile.generate-bitstream .
+docker build -t vivado_bitstream:latest -f Dockerfile .
 docker build -t vivado_drc:latest -f Dockerfile.drc .
 ```
 
@@ -112,3 +112,69 @@ Replace `vivado_bitstream` with `vivado_drc` if you want to run DRC instead of b
 - The `LD_PRELOAD` environment variable is set to `/lib/x86_64-linux-gnu/libudev.so.1` to ensure proper functionality of Vivado within the containers.
 - Both Docker images are based on the Vivado runtime image `072422391281.dkr.ecr.us-east-1.amazonaws.com/vivado:v2023.2`.
 - When running in AWS Nitro Enclaves, be aware of the increased security measures and potential limitations on network access and file system persistence.
+
+## Benchmark Result
+
+| Environment  | Total Elapsed Time | Peak Memory (MB) |
+|--------------|---------------------|------------------|
+| Outside TEE  | 0 days 00:05:06     | 2262.371         |
+| Inside TEE   | 0 days 00:05:43     | 2195.375         |
+
+### Detailed Metrics Comparison
+#### Metrics Outside TEE
+
+| Stage                                           | CPU Time | Elapsed Time | Peak Memory (MB) | Elapsed Time (s) |
+|-------------------------------------------------|----------|--------------|------------------|------------------|
+| Starting RTL Elaboration                        | 00:00:04 | 00:00:04     | 2047.805         | 4.0              |
+| Finished RTL Elaboration                        | 00:00:05 | 00:00:05     | 2122.773         | 5.0              |
+| Finished Handling Custom Attributes             | 00:00:05 | 00:00:05     | 2140.586         | 5.0              |
+| Finished RTL Optimization Phase 1               | 00:00:05 | 00:00:05     | 2140.586         | 5.0              |
+| Constraint Validation Runtime                   | 00:00:00 | 00:00:00     | 2262.371         | 0.0              |
+| Finished Constraint Validation                  | 00:00:11 | 00:00:11     | 2262.371         | 11.0             |
+| Finished Loading Part and Timing Information    | 00:00:11 | 00:00:11     | 2262.371         | 11.0             |
+| Finished applying 'set_property' XDC Constraints| 00:00:11 | 00:00:11     | 2262.371         | 11.0             |
+| Finished RTL Optimization Phase 2               | 00:00:11 | 00:00:11     | 2262.371         | 11.0             |
+| Finished Cross Boundary and Area Optimization   | 00:00:12 | 00:00:12     | 2262.371         | 12.0             |
+| Finished Applying XDC Timing Constraints        | 00:00:16 | 00:00:17     | 2262.371         | 17.0             |
+| Finished Timing Optimization                    | 00:00:16 | 00:00:17     | 2262.371         | 17.0             |
+| Finished Technology Mapping                     | 00:00:16 | 00:00:17     | 2262.371         | 17.0             |
+| Finished IO Insertion                           | 00:00:20 | 00:00:20     | 2262.371         | 20.0             |
+| Finished Renaming Generated Instances           | 00:00:20 | 00:00:20     | 2262.371         | 20.0             |
+| Finished Rebuilding User Hierarchy              | 00:00:20 | 00:00:20     | 2262.371         | 20.0             |
+| Finished Renaming Generated Ports               | 00:00:20 | 00:00:20     | 2262.371         | 20.0             |
+| Finished Handling Custom Attributes             | 00:00:20 | 00:00:20     | 2262.371         | 20.0             |
+| Finished Renaming Generated Nets                | 00:00:20 | 00:00:20     | 2262.371         | 20.0             |
+| Finished Writing Synthesis Report               | 00:00:20 | 00:00:20     | 2262.371         | 20.0             |
+| Synthesis Optimization Runtime                  | 00:00:19 | 00:00:19     | 2262.371         | 19.0             |
+| Synthesis Optimization Complete                 | 00:00:20 | 00:00:21     | 2262.371         | 21.0             |
+
+#### Metrics Inside TEE
+
+| Stage                                           | CPU Time | Elapsed Time | Peak Memory (MB) | Elapsed Time (s) |
+|-------------------------------------------------|----------|--------------|------------------|------------------|
+| Starting RTL Elaboration                        | 00:00:05 | 00:00:05     | 2038.863         | 5.0              |
+| Finished RTL Elaboration                        | 00:00:06 | 00:00:07     | 2113.801         | 7.0              |
+| Finished Handling Custom Attributes             | 00:00:06 | 00:00:07     | 2131.613         | 7.0              |
+| Finished RTL Optimization Phase 1               | 00:00:06 | 00:00:07     | 2131.613         | 7.0              |
+| Constraint Validation Runtime                   | 00:00:00 | 00:00:00     | 2195.375         | 0.0              |
+| Finished Constraint Validation                  | 00:00:12 | 00:00:13     | 2195.375         | 13.0             |
+| Finished Loading Part and Timing Information    | 00:00:12 | 00:00:13     | 2195.375         | 13.0             |
+| Finished applying 'set_property' XDC Constraints| 00:00:12 | 00:00:13     | 2195.375         | 13.0             |
+| Finished RTL Optimization Phase 2               | 00:00:12 | 00:00:13     | 2195.375         | 13.0             |
+| Finished Cross Boundary and Area Optimization   | 00:00:14 | 00:00:14     | 2195.375         | 14.0             |
+| Finished Applying XDC Timing Constraints        | 00:00:18 | 00:00:18     | 2195.375         | 18.0             |
+| Finished Timing Optimization                    | 00:00:18 | 00:00:18     | 2195.375         | 18.0             |
+| Finished Technology Mapping                     | 00:00:18 | 00:00:18     | 2195.375         | 18.0             |
+| Finished IO Insertion                           | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+| Finished Renaming Generated Instances           | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+| Finished Rebuilding User Hierarchy              | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+| Finished Renaming Generated Ports               | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+| Finished Handling Custom Attributes             | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+| Finished Renaming Generated Nets                | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+| Finished Writing Synthesis Report               | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+| Synthesis Optimization Runtime                  | 00:00:20 | 00:00:21     | 2195.375         | 21.0             |
+| Synthesis Optimization Complete                 | 00:00:22 | 00:00:22     | 2195.375         | 22.0             |
+
+### Visual Comparison
+
+![Comparison Plot](benchmark-metrics/comparison.png)
