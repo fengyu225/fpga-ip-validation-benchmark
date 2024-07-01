@@ -19,7 +19,7 @@ This project provides a Docker image for Xilinx Vivado 2023.2, enabling a consis
 This script installs Docker, Docker Buildx, and AWS CLI v2 if they're not already present on your system.
 
 2. Prepare the Vivado installer:
-    - Place the Vivado installer `FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin` in the same directory as the Dockerfile.
+    - Make sure the Vivado installer `FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin` in the project root directory.
     - Create a `password.txt` file containing your Xilinx account password, put username in the first line and password in the second line.
     - Ensure `generate_token.expect` and `install_configs.txt` are present in the directory.
 

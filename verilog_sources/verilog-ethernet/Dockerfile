@@ -33,7 +33,7 @@ ENV LC_ALL=en_US.UTF-8
 RUN mkdir -p /opt/Xilinx
 
 # Copy the installer and expect script into the image
-COPY FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin /opt/Xilinx/
+COPY ../../FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin /opt/Xilinx/
 COPY generate_token.expect /opt/Xilinx/
 
 # Set working directory
