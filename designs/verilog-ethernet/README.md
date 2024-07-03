@@ -95,7 +95,7 @@ docker build -t verilog-ethernet-bits:latest -f Dockerfile .
 1. Outside TEE:
 
 ```bash
-docker run --rm -v $(pwd):/home/ubuntu/verilog_sources/design1 verilog-ethernet-bits:latest
+docker run --rm -v $(pwd):/home/ubuntu/designs/design1 verilog-ethernet-bits:latest
 ```
 
 2. Inside TEE (AWS Nitro Enclave):

@@ -2,7 +2,7 @@
 
 # Set necessary environment variables
 export LANGUAGE=en_US:en
-export PWD=/home/ubuntu/verilog_sources/design1
+export PWD=/home/ubuntu/designs/design1
 export TZ=Etc/UTC
 export LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1
 export HOME=/root
@@ -14,4 +14,4 @@ export PATH=/opt/Xilinx/Vivado/2023.2/bin:/usr/local/sbin:/usr/local/bin:/usr/sb
 # Print the current working directory and list its contents
 echo "Current working directory is: $(pwd)"
 
-LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 vivado -mode batch -source /home/ubuntu/verilog_sources/design1/generate_bitstream.tcl
+LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1 vivado -mode batch -source /home/ubuntu/designs/design1/generate_bitstream.tcl

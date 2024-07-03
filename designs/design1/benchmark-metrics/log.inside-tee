@@ -294,14 +294,14 @@ WARNING: Default location for XILINX_HLS not found
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 
-source /home/ubuntu/verilog_sources/design1/generate_bitstream.tcl
+source /home/ubuntu/designs/design1/generate_bitstream.tcl
 # set_msg_config -severity INFO -limit 10000
 # set_msg_config -severity STATUS -limit 10000
 # set_msg_config -severity WARNING -limit 10000
 # set_msg_config -severity ERROR -limit 10000
 # set project_name "design1_project"
-# set project_dir "/home/ubuntu/verilog_sources/design1/$project_name"
-# set source_dir "/home/ubuntu/verilog_sources/design1"
+# set project_dir "/home/ubuntu/designs/design1/$project_name"
+# set source_dir "/home/ubuntu/designs/design1"
 # set source_file "$source_dir/design_wrapper.v"
 # set constraints_file "$source_dir/constraints.xdc"
 # set bitstream_file "$project_dir/$project_name.bit"
@@ -323,8 +323,8 @@ INFO: [Synth 8-7075] Helper process launched with PID 645
 ---------------------------------------------------------------------------------
 Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2038.863 ; gain = 402.746 ; free physical = 118297 ; free virtual = 159668
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'design_wrapper' [/home/ubuntu/verilog_sources/design1/design_wrapper.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'design_wrapper' (0#1) [/home/ubuntu/verilog_sources/design1/design_wrapper.v:1]
+INFO: [Synth 8-6157] synthesizing module 'design_wrapper' [/home/ubuntu/designs/design1/design_wrapper.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'design_wrapper' (0#1) [/home/ubuntu/designs/design1/design_wrapper.v:1]
 ---------------------------------------------------------------------------------
 Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2113.801 ; gain = 477.684 ; free physical = 118201 ; free virtual = 159573
 ---------------------------------------------------------------------------------
@@ -342,11 +342,11 @@ INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [/home/ubuntu/verilog_sources/design1/constraints.xdc]
-CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/verilog_sources/design1/constraints.xdc:7]
-CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/verilog_sources/design1/constraints.xdc:8]
-CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/verilog_sources/design1/constraints.xdc:9]
-Finished Parsing XDC File [/home/ubuntu/verilog_sources/design1/constraints.xdc]
+Parsing XDC File [/home/ubuntu/designs/design1/constraints.xdc]
+CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/designs/design1/constraints.xdc:7]
+CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/designs/design1/constraints.xdc:8]
+CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/designs/design1/constraints.xdc:9]
+Finished Parsing XDC File [/home/ubuntu/designs/design1/constraints.xdc]
 Completed Processing XDC Constraints
 
 Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2195.340 ; gain = 0.000 ; free physical = 118186 ; free virtual = 159557
@@ -494,11 +494,11 @@ Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory
 INFO: [Netlist 29-17] Analyzing 6 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [/home/ubuntu/verilog_sources/design1/constraints.xdc]
-CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/verilog_sources/design1/constraints.xdc:7]
-CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/verilog_sources/design1/constraints.xdc:8]
-CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/verilog_sources/design1/constraints.xdc:9]
-Finished Parsing XDC File [/home/ubuntu/verilog_sources/design1/constraints.xdc]
+Parsing XDC File [/home/ubuntu/designs/design1/constraints.xdc]
+CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/designs/design1/constraints.xdc:7]
+CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/designs/design1/constraints.xdc:8]
+CRITICAL WARNING: [Common 17-161] Invalid option value '#' specified for 'objects'. [/home/ubuntu/designs/design1/constraints.xdc:9]
+Finished Parsing XDC File [/home/ubuntu/designs/design1/constraints.xdc]
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2195.375 ; gain = 0.000 ; free physical = 118468 ; free virtual = 159844
 INFO: [Project 1-111] Unisim Transformation Summary:
@@ -990,7 +990,7 @@ INFO: [Common 17-83] Releasing license: Implementation
 route_design completed successfully
 route_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:22 . Memory (MB): peak = 2643.168 ; gain = 56.027 ; free physical = 118113 ; free virtual = 159489
 # write_bitstream -force $bitstream_file
-Command: write_bitstream -force /home/ubuntu/verilog_sources/design1/design1_project/design1_project.bit
+Command: write_bitstream -force /home/ubuntu/designs/design1/design1_project/design1_project.bit
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
 Running DRC as a precondition to command write_bitstream
@@ -1009,7 +1009,7 @@ Loading route data...
 Processing options...
 Creating bitmap...
 Creating bitstream...
-Writing bitstream /home/ubuntu/verilog_sources/design1/design1_project/design1_project.bit...
+Writing bitstream /home/ubuntu/designs/design1/design1_project/design1_project.bit...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-1876] WebTalk data collection is mandatory when using a ULT device. To see the specific WebTalk data collected for your design, open the usage_statistics_webtalk.html or usage_statistics_webtalk.xml file in the implementation directory.
 INFO: [Common 17-83] Releasing license: Implementation

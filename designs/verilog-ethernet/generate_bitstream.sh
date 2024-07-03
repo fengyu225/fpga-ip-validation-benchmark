@@ -2,7 +2,6 @@
 
 # Set necessary environment variables
 export LANGUAGE=en_US:en
-export PWD=/home/ubuntu/verilog_sources/design1
 export TZ=Etc/UTC
 export LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1
 export HOME=/root

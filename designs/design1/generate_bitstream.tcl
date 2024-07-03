@@ -6,8 +6,8 @@ set_msg_config -severity ERROR -limit 10000
 
 # Set the project name and directory
 set project_name "design1_project"
-set project_dir "/home/ubuntu/verilog_sources/design1/$project_name"
-set source_dir "/home/ubuntu/verilog_sources/design1"
+set project_dir "/home/ubuntu/designs/design1/$project_name"
+set source_dir "/home/ubuntu/designs/design1"
 set source_file "$source_dir/design_wrapper.v"
 set constraints_file "$source_dir/constraints.xdc"
 set bitstream_file "$project_dir/$project_name.bit"

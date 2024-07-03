@@ -31,7 +31,7 @@ docker build -t vivado_drc:latest -f Dockerfile.drc .
 To generate a bitstream, run the Docker container:
 
 ```sh
-docker run --rm -v $(pwd):/home/ubuntu/verilog_sources/design1 vivado_bitstream:latest
+docker run --rm -v $(pwd):/home/ubuntu/designs/design1 vivado_bitstream:latest
 ```
 
 ### Running DRC
@@ -39,7 +39,7 @@ docker run --rm -v $(pwd):/home/ubuntu/verilog_sources/design1 vivado_bitstream:
 To run DRC, run the Docker container:
 
 ```sh
-docker run --rm -v $(pwd):/home/ubuntu/verilog_sources/design1 vivado_drc:latest
+docker run --rm -v $(pwd):/home/ubuntu/designs/design1 vivado_drc:latest
 ```
 
 ## Running in AWS Nitro Enclave

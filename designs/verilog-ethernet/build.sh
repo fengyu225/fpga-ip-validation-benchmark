@@ -15,13 +15,13 @@ docker buildx inspect --bootstrap
 CACHE_DIR="$HOME/.cache/docker-buildx"
 mkdir -p "$CACHE_DIR"
 
-cp ../FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin .
+cp ../../FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin .
 
 # Build the Docker image and output it to the local Docker daemon
 # Initialize the cache by running a dummy build step to populate the cache directory
-docker buildx build --platform linux/amd64 -t vivado-runtime --cache-to=type=local,dest="$CACHE_DIR" --progress=plain --load .
+docker buildx build --platform linux/amd64 -t verilog-ethernet-bits --cache-to=type=local,dest="$CACHE_DIR" --progress=plain --load .
 
 # Perform the actual build using the initialized cache
-docker buildx build --platform linux/amd64 -t vivado-runtime --output type=docker \
+docker buildx build --platform linux/amd64 -t verilog-ethernet-bits --output type=docker \
   --cache-from type=local,src="$CACHE_DIR" \
   --cache-to type=local,dest="$CACHE_DIR" .

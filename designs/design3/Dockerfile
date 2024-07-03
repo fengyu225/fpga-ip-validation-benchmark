@@ -24,22 +24,22 @@ RUN apt-get update && apt-get install -y \
 
 # Set locale
 RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 # Copy necessary scripts and source files into the Docker image
-COPY . /home/ubuntu/verilog_sources/design1
+COPY . /home/ubuntu/designs/design3
 
 # Ensure the run scripts have execute permissions
-RUN chmod +x /home/ubuntu/verilog_sources/design1/run_drc.sh
-RUN chmod +x /home/ubuntu/verilog_sources/design1/generate_bitstream.sh
-RUN chmod +x /home/ubuntu/verilog_sources/design1/entrypoint.sh
+RUN chmod +x /home/ubuntu/designs/design3/run_drc.sh
+RUN chmod +x /home/ubuntu/designs/design3/generate_bitstream.sh
+RUN chmod +x /home/ubuntu/designs/design3/entrypoint.sh
 
 ENV LD_PRELOAD=/lib/x86_64-linux-gnu/libudev.so.1
 
 # Set the working directory
-WORKDIR /home/ubuntu/verilog_sources/design1
+WORKDIR /home/ubuntu/designs/design3
 
 # Set the entrypoint to the entrypoint script
 ENTRYPOINT ["./entrypoint.sh"]
