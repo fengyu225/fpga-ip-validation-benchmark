@@ -117,8 +117,6 @@ nitro-cli run-enclave --eif-path vivado_bitstream.eif --memory 130420 --cpu-coun
 
 ## Detailed Metrics Comparison
 
-[The detailed metrics comparison remains the same as in the previous version]
-
 ## Visual Comparison
 
 ![Comparison Plot](benchmark-metrics/comparison.png)

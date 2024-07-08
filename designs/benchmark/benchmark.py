@@ -4,6 +4,11 @@ import sys
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# Set pandas display options to show all rows and columns
+pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
+pd.set_option('display.width', None)
+pd.set_option('display.max_colwidth', None)
 
 def extract_metrics(log_content):
     metrics = []
@@ -21,7 +26,6 @@ def extract_metrics(log_content):
 
     return metrics
 
-
 def aggregate_metrics(metrics):
     total_elapsed_time = pd.to_timedelta('0:00:00')
     peak_memory = 0
@@ -32,7 +36,6 @@ def aggregate_metrics(metrics):
             peak_memory = metric['Peak Memory (MB)']
 
     return total_elapsed_time, peak_memory
-
 
 def visualize_comparison(metrics_outside, metrics_inside):
     # Convert the metrics to DataFrames
@@ -62,7 +65,6 @@ def visualize_comparison(metrics_outside, metrics_inside):
     plt.show()
 
     return metrics_df_outside, metrics_df_inside
-
 
 def main(log_outside_path, log_inside_path):
     # Read log files
@@ -94,14 +96,14 @@ def main(log_outside_path, log_inside_path):
     metrics_df_outside, metrics_df_inside = visualize_comparison(metrics_outside, metrics_inside)
 
     # Display the summary
-    print(summary_df)
+    print("Summary:")
+    print(summary_df.to_string(index=False))
 
     # Display detailed metrics for each stage
     print("\nMetrics Outside TEE:")
-    print(metrics_df_outside)
+    print(metrics_df_outside.to_string(index=False))
     print("\nMetrics Inside TEE:")
-    print(metrics_df_inside)
-
+    print(metrics_df_inside.to_string(index=False))
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

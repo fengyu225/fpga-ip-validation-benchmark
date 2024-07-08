@@ -33,7 +33,7 @@ ENV LC_ALL=en_US.UTF-8
 RUN mkdir -p /opt/Xilinx
 
 # Copy the installer and expect script into the image
-COPY FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin /opt/Xilinx/
+COPY ./FPGAs_AdaptiveSoCs_Unified_2023.2_1013_2256_Lin64.bin /opt/Xilinx/
 COPY generate_token.expect /opt/Xilinx/
 
 # Set working directory
@@ -58,22 +58,23 @@ RUN expect generate_token.expect /opt/Xilinx/password.txt
 # Install Vivado
 RUN /opt/Xilinx/installer/xsetup --agree XilinxEULA,3rdPartyEULA --location /opt/Xilinx --batch Install -c /opt/Xilinx/install_configs.txt
 
-# Clone vivado-risc-v repository
-RUN git clone https://github.com/eugene-tarassov/vivado-risc-v.git /vivado-risc-v
+# Clone Xilinx Board Store repository
+RUN git clone https://github.com/Xilinx/XilinxBoardStore.git /board_store
 
-RUN git clone https://github.com/Digilent/vivado-boards.git /vivado-boards
+# Clone OpenNIC shell repository
+RUN git clone https://github.com/Xilinx/open-nic-shell.git /open-nic-shell
 
 # Stage 2: Final image setup
 FROM ubuntu:20.04
 
 # Set environment variables for Vivado
-ENV PATH='/opt/Xilinx/Vivado/2023.2/bin:$PATH'
+ENV PATH="/opt/Xilinx/Vivado/2023.2/bin:$PATH"
 ENV LD_PRELOAD='/lib/x86_64-linux-gnu/libudev.so.1'
 
 # Copy only the necessary files from the base stage
 COPY --from=base /opt/Xilinx/Vivado /opt/Xilinx/Vivado
-COPY --from=base /vivado-risc-v /vivado-risc-v
-COPY --from=base /vivado-boards /vivado-boards
+COPY --from=base /board_store /board_store
+COPY --from=base /open-nic-shell /open-nic-shell
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
@@ -81,7 +82,10 @@ ENV TZ=Etc/UTC
 # Install necessary packages for building
 RUN apt-get update && apt-get install -y \
     build-essential \
+    wget \
+    curl \
     xz-utils \
+    tar \
     libtinfo5 \
     libncurses5 \
     libx11-6 \
@@ -89,10 +93,9 @@ RUN apt-get update && apt-get install -y \
     libxft2 \
     libxtst6 \
     locales \
-    make \
+    expect \
     git \
-    sudo \
-    rsync \
+    make \
     && rm -rf /var/lib/apt/lists/*
 
 # Set locale
@@ -101,16 +104,11 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
-ENV CONFIG=rocket64b1
-ENV BOARD=arty-a7-100t
-
 # Copy necessary scripts and source files into the Docker image
-COPY generate_bitstream.sh /vivado-risc-v/generate_bitstream.sh
-COPY generate_project.sh /vivado-risc-v/generate_project.sh
+COPY generate_bitstream.sh /open-nic-shell/generate_bitstream.sh
 
-RUN /vivado-risc-v/generate_project.sh
+# Set working directory
+WORKDIR /open-nic-shell/script
 
-WORKDIR /vivado-risc-v
-
-# Set the default command to 'make'
-CMD ["/vivado-risc-v/generate_bitstream.sh"]
+# Set the default command to run the bitstream generation script
+CMD ["/open-nic-shell/generate_bitstream.sh"]
