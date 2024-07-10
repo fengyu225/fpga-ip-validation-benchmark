@@ -7,7 +7,8 @@ This project provides tools and Docker images for benchmarking FPGA IP bitstream
 - `designs/`: Contains FPGA designs and Docker setups for bitstream generation and DRC.
   - `benchmark/`: Scripts for comparing performance metrics.
   - `design1/`: Simple FPGA design with Docker setups for bitstream generation and DRC.
-  - `design2/`: Second FPGA design with similar setup.
+  - `open-nic-shell`: Docker setups for bitstream generation and DRC for the open-source project open-nic-shell
+  - `verilog-ethernet`: Docker setups for bitstream generation and DRC for the open-source project verilog-ethernet.
 - `vivado-runtime/`: Docker setup for Xilinx Vivado 2023.2 runtime environment.
 
 ## Components
@@ -18,11 +19,13 @@ Located in `designs/benchmark/`, this component provides tools to compare the pe
 
 [View Benchmark README](designs/benchmark/README.md)
 
-### Design1 and Design2
+### Designs
 
-These directories contain FPGA designs along with Docker setups for bitstream generation and DRC. They can be run both in standard Docker environments and within AWS Nitro Enclaves for enhanced security.
+These directories contain Docker setups for bitstream generation and DRC. They can be run both in standard Docker environments and within AWS Nitro Enclaves for enhanced security.
 
-[View Design1 README](designs/design1/README.md)
+[View design1 README](designs/design1/README.md) <br>
+[View verilog-ethernet README](designs/verilog-ethernet/README.md) <br>
+[View open-nic-shell README](designs/open-nic-shell/README.md)
 
 ### Vivado Runtime
 
